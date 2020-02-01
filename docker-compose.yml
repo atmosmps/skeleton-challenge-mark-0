@@ -1,0 +1,41 @@
+version: "3.6"
+services:
+
+    postgres:
+      image: postgres:11.1-alpine
+      container_name: lliege-challenge-api-postgres
+      env_file:
+        - .env.dev.local
+      working_dir: /application
+      volumes:
+        - .:/application
+      environment:
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=pass130911
+        - POSTGRES_DB=lliege_challenge
+      ports:
+        - "5435:5432"
+
+    webserver:
+      image: nginx:alpine
+      container_name: lliege-challenge-api-webserver
+      env_file:
+        - .env.dev.local
+      working_dir: /application
+      volumes:
+        - .:/application
+        - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      ports:
+        - "8080:80"
+      depends_on:
+        - postgres
+
+    php-fpm:
+      build: docker/php-fpm
+      container_name: lliege-challenge-api-php-fpm
+      env_file:
+        - .env.dev.local
+      working_dir: /application
+      volumes:
+        - .:/application
+        - ./docker/php-fpm/php-ini-overrides.ini:/etc/php/7.3/fpm/conf.d/99-overrides.ini
