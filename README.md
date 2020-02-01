@@ -23,3 +23,15 @@ VALUES  (1, 1, 'João da Silva', 'M', '1995-06-22', 'Brasileiro', '58226715008',
 		(9, 3, 'Paulo Peres', 'M', '1989-01-11', 'Brasileiro', '59697662088', '485824541','solteiro'),
 		(10, 3, 'João Carlos Amorim', 'M', '1996-03-10', 'Brasileiro', '79159458070', '165404759','solteiro');
 ```
+
+### Procedure criada na Base de Dados
+
+```
+create or replace procedure delete_programa_social(table_id integer)
+LANGUAGE SQL
+AS $$
+DELETE FROM public.social_program WHERE id = table_id;
+$$;
+
+call delete_programa_social(3);
+```
