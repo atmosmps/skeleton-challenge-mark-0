@@ -1,20 +1,69 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Hello FamiliaController!{% endblock %}
+{% block title %}familias{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<h1>Familias</h1>
+<hr>
+<a href="{{ path('familia_create') }}" class="btn btn-success" ><i class="fas fa-plus"></i> Novo</a>
+<hr>
+<div>
+    {% set foo = "" %}
+    <table id="example2" class="table table-striped projects">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Estado</th>
+            <th>Cidade</th>
+            <th>Programa Social</th>
+            <th>Acoes</th>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+        </tr>
+        </thead>
+        <tbody>
+        {% set idMaterial = "" %}
+        {% for familia in familias %}
+            <tr>
+                <td>{{ familia.id }}</td>
+                <td>{{ familia.estado }}</td>
+                <td>{{ familia.cidade }}</td>
+                <td>{{ familia.idProgramaSocial }}</td>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/atmosmps/Workspace/drafts/lliege-challenge/src/Controller/FamiliaController.php'|file_link(0) }}">src/Controller/FamiliaController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/atmosmps/Workspace/drafts/lliege-challenge/templates/familia/index.html.twig'|file_link(0) }}">templates/familia/index.html.twig</a></code></li>
-    </ul>
-</div>
-{% endblock %}
+                <td class="project-actions text-right">
+
+                    <a class="btn btn-primary btn-sm" href="{{ path('familia_update', {'id': colete.id}) }}">
+                        <i class="fas fa-pencil-alt">
+                        </i>
+                        Editar
+                    </a>
+                    <a class="btn btn-danger btn-sm " data-toggle="modal" data-target="#confirm" href="{{ path('familia_delete', {'id': colete.id}) }}">
+                        <i class="fas fa-trash">
+                        </i>
+                        Deletar
+                    </a>
+                    <div class="modal fade" id="confirm" role="dialog">
+                        <div class="modal-dialog modal-md">
+
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <p> DESEJA DELETAR?</p>
+                                </div>
+                                <div class="modal-footer">
+
+                                    <button type= "submit" class="btn btn-success" >Deletar</button>
+                                    <button type="button" data-dismiss="modal" class="btn btn-default">Cancelar</button>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                
+                </td>
+            </tr>
+
+
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% endblock %}
