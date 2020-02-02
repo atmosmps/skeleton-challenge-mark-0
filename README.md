@@ -31,3 +31,5 @@
 5. Execute o comando para acessar a aplicação
 
     `localhost:8080`
+
+**OBS: Se não estiver usando o Docker, terá que alterar as configurações de Banco de Dados no Symfony. E criar a base localmente.**
