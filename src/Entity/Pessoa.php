@@ -16,10 +16,10 @@ class Pessoa
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $familia_id;
+//    /**
+//     * @ORM\Column(type="integer")
+//     */
+//    private $familia_id;
 
     /**
      * @ORM\Column(type="string", length=150)
@@ -66,18 +66,18 @@ class Pessoa
     {
         return $this->id;
     }
-
-    public function getFamiliaId(): ?int
-    {
-        return $this->familia_id;
-    }
-
-    public function setFamiliaId(int $familia_id): self
-    {
-        $this->familia_id = $familia_id;
-
-        return $this;
-    }
+//
+//    public function getFamiliaId(): ?int
+//    {
+//        return $this->familia_id;
+//    }
+//
+//    public function setFamiliaId(int $familia_id): self
+//    {
+//        $this->familia_id = $familia_id;
+//
+//        return $this;
+//    }
 
     public function getNome(): ?string
     {
@@ -161,5 +161,25 @@ class Pessoa
         $this->estado_civil = $estado_civil;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFamilia()
+    {
+        return $this->familia;
+    }
+
+    /**
+     * @param mixed $familia
+     */
+    public function setFamilia($familia): void
+    {
+        $this->familia = $familia;
+    }
+    public function __toString()
+    {
+        return (string) $this->nome;
     }
 }

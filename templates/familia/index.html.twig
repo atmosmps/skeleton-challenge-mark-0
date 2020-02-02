@@ -1,20 +1,71 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Hello FamiliaController!{% endblock %}
+{% block title %}familias{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<h1>Familias</h1>
+<hr>
+<a href="{{ path('familia_create') }}" class="btn btn-success" ><i class="fas fa-plus"></i> Novo</a>
+<hr>
+<div>
+    {% set foo = "" %}
+    <table id="example2" class="table table-striped projects">
+        <thead>
+        <tr>
+            <th class="text-center">#</th>
+            <th class="text-center">Estado</th>
+            <th class="text-center">Cidade</th>
+            <th class="text-center">Programa Social</th>
+            <th class="text-center">Acões</th>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+        </tr>
+        </thead>
+        <tbody>
+        {% set idMaterial = "" %}
+        {% for familia in familias %}
+            <tr>
+                <td class="text-center">{{ familia.id }}</td>
+                <td class="text-center">{{ familia.estado }}</td>
+                <td class="text-center">{{ familia.cidade }}</td>
+                <td class="text-center">{{ familia.programaSocial }}</td>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/atmosmps/Workspace/drafts/lliege-challenge/src/Controller/FamiliaController.php'|file_link(0) }}">src/Controller/FamiliaController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/atmosmps/Workspace/drafts/lliege-challenge/templates/familia/index.html.twig'|file_link(0) }}">templates/familia/index.html.twig</a></code></li>
-    </ul>
-</div>
-{% endblock %}
+                <td class="text-center project-actions text-right">
+
+                    <a class="btn btn-primary btn-sm" href="{{ path('familia_update', {'id': familia.id}) }}">
+                        <i class="fas fa-pencil-alt">
+                        </i>
+                        Editar
+                    </a>
+                    <button type="button" data-toggle="modal" data-target="#confirm" class="btn btn-danger btn-sm">Deletar</button>
+
+                    <div class="modal fade" id="confirm" role="dialog">
+                        <div class="modal-dialog modal-md">
+
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <p> DESEJA DELETAR?</p>
+                                </div>
+                                <div class="modal-footer">
+
+                                    <a class="btn btn-danger" href="{{ path('familia_delete', {'id': familia.id}) }}">
+                                        <i class="fas fa-pencil-alt">
+                                        </i>
+                                        Deletar
+                                    </a>
+                                    <button type="button" data-dismiss="modal" class="btn btn-default">Cancelar</button>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </td>
+            </tr>
+
+
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% endblock %}

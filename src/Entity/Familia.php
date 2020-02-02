@@ -46,10 +46,10 @@ class Familia
      */
     private $num_logradouro;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $programa_social_id;
+//    /**
+//     * @ORM\Column(type="integer")
+//     */
+//    private $programa_social_id;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\SocialProgram", inversedBy="familia")
@@ -139,15 +139,48 @@ class Familia
         return $this;
     }
 
-    public function getIdProgramaSocial(): ?int
+    /**
+     * @return mixed
+     */
+    public function getProgramaSocial()
     {
-        return $this->programa_social_id;
+        return $this->programaSocial;
     }
 
-    public function setIdProgramaSocial(int $programa_social_id): self
+    /**
+     * @param mixed $programaSocial
+     */
+    public function setProgramaSocial($programaSocial): void
     {
-        $this->programa_social_id = $programa_social_id;
-
-        return $this;
+        $this->programaSocial = $programaSocial;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPessoa()
+    {
+        return $this->pessoa;
+    }
+
+    /**
+     * @param mixed $pessoa
+     */
+    public function setPessoa($pessoa): void
+    {
+        $this->pessoa = $pessoa;
+    }
+
+//    public function getIdProgramaSocial(): ?int
+//    {
+//        return $this->programa_social_id;
+//    }
+
+//    public function setIdProgramaSocial(int $programa_social_id): self
+//    {
+//        $this->programa_social_id = $programa_social_id;
+//
+//        return $this;
+//    }
+
 }
