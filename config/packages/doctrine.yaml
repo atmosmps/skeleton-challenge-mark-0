@@ -12,9 +12,9 @@ doctrine:
                 driver: 'pdo_pgsql'
                 server_version: '11'
                 charset: utf8
-                host: localhost
+                host: postgres # Nome do serviço do container Docker
                 dbname: lliege_challenge
-                port: 5435
+                port: 5432
                 user: postgres
                 password: pass130911
                 default_table_options:
