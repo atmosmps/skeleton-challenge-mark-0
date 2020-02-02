@@ -1,3 +1,4 @@
+{% extends 'base.html.twig' %}
 {% block title %}familias{% endblock %}
 
 {% block body %}
@@ -10,11 +11,11 @@
     <table id="example2" class="table table-striped projects">
         <thead>
         <tr>
-            <th>#</th>
-            <th>Estado</th>
-            <th>Cidade</th>
-            <th>Programa Social</th>
-            <th>Acoes</th>
+            <th class="text-center">#</th>
+            <th class="text-center">Estado</th>
+            <th class="text-center">Cidade</th>
+            <th class="text-center">Programa Social</th>
+            <th class="text-center">Acões</th>
 
         </tr>
         </thead>
@@ -22,23 +23,20 @@
         {% set idMaterial = "" %}
         {% for familia in familias %}
             <tr>
-                <td>{{ familia.id }}</td>
-                <td>{{ familia.estado }}</td>
-                <td>{{ familia.cidade }}</td>
-                <td>{{ familia.idProgramaSocial }}</td>
+                <td class="text-center">{{ familia.id }}</td>
+                <td class="text-center">{{ familia.estado }}</td>
+                <td class="text-center">{{ familia.cidade }}</td>
+                <td class="text-center">{{ familia.programaSocial }}</td>
 
-                <td class="project-actions text-right">
+                <td class="text-center project-actions text-right">
 
-                    <a class="btn btn-primary btn-sm" href="{{ path('familia_update', {'id': colete.id}) }}">
+                    <a class="btn btn-primary btn-sm" href="{{ path('familia_update', {'id': familia.id}) }}">
                         <i class="fas fa-pencil-alt">
                         </i>
                         Editar
                     </a>
-                    <a class="btn btn-danger btn-sm " data-toggle="modal" data-target="#confirm" href="{{ path('familia_delete', {'id': colete.id}) }}">
-                        <i class="fas fa-trash">
-                        </i>
-                        Deletar
-                    </a>
+                    <button type="button" data-toggle="modal" data-target="#confirm" class="btn btn-danger btn-sm">Deletar</button>
+
                     <div class="modal fade" id="confirm" role="dialog">
                         <div class="modal-dialog modal-md">
 
@@ -48,7 +46,11 @@
                                 </div>
                                 <div class="modal-footer">
 
-                                    <button type= "submit" class="btn btn-success" >Deletar</button>
+                                    <a class="btn btn-danger" href="{{ path('familia_delete', {'id': familia.id}) }}">
+                                        <i class="fas fa-pencil-alt">
+                                        </i>
+                                        Deletar
+                                    </a>
                                     <button type="button" data-dismiss="modal" class="btn btn-default">Cancelar</button>
 
                                 </div>
@@ -57,7 +59,7 @@
                         </div>
                     </div>
 
-                
+
                 </td>
             </tr>
 
