@@ -18,7 +18,7 @@ class FamiliaType extends AbstractType
             ->add('cep')
             ->add('logradouro')
             ->add('num_logradouro')
-            ->add('programa_social_id')
+          //  ->add('programa_social_id')
             ->add('programaSocial')
         ;
     }
