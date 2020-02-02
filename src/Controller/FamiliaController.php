@@ -56,7 +56,6 @@ class FamiliaController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
             $familia = $form->getData();
 
-            $familia->setUpdatedAt(new \DateTime("now", new \DateTimeZone("America/Sao_Paulo")));
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->merge($familia);
             $entityManager->flush();

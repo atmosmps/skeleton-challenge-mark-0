@@ -1,20 +1,21 @@
 version: "3.6"
 services:
 
-    postgres:
-      image: postgres:11.1-alpine
-      container_name: lliege-challenge-api-postgres
+    mysql:
+      image: mysql:5.7
+      container_name: lliege-challenge-api-mysql
       env_file:
         - .env.dev.local
       working_dir: /application
       volumes:
         - .:/application
       environment:
-        - POSTGRES_USER=postgres
-        - POSTGRES_PASSWORD=pass130911
-        - POSTGRES_DB=lliege_challenge
+        - MYSQL_ROOT_PASSWORD=mdalycodb
+        - MYSQL_DATABASE=lliege_challenge
+        - MYSQL_USER=cristiane
+        - MYSQL_PASSWORD=mdalycodb
       ports:
-        - "5435:5432"
+        - "3308:3306"
 
     webserver:
       image: nginx:alpine
@@ -28,7 +29,7 @@ services:
       ports:
         - "8080:80"
       depends_on:
-        - postgres
+        - mysql
 
     php-fpm:
       build: docker/php-fpm

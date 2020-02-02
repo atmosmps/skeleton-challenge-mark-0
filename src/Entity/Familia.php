@@ -53,7 +53,7 @@ class Familia
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\SocialProgram", inversedBy="familia")
-     * @ORM\JoinColumn(name="programa_social_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="programa_social_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $programaSocial;
 

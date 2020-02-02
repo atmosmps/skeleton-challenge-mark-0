@@ -58,7 +58,7 @@ class Pessoa
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Familia", inversedBy="pessoa")
-     * @ORM\JoinColumn(name="familia_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="familia_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $familia;
 
