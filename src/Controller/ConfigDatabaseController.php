@@ -2,35 +2,36 @@
 
 namespace App\Controller;
 
-use App\Repository\EntityRepository\AbstractEntityRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\EntityRepository\ConfigDatabaseEntityRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
-class SqlController extends AbstractController
+class ConfigDatabaseController extends ConfigDatabaseEntityRepository
 {
-    private $abstractEntityRepository;
+    private $configDatabaseEntityRepository;
 
-    public function __construct(AbstractEntityRepository $abstractEntityRepository)
+    public function __construct(ConfigDatabaseEntityRepository $configDatabaseEntityRepository)
     {
-        $this->abstractEntityRepository = $abstractEntityRepository;
+        $this->configDatabaseEntityRepository = $configDatabaseEntityRepository;
     }
 
     /**
-     * @Route("/procedure/first/insert", methods={"POST"}, name="create_first_insert")
+     * @Route("/procedure/first/insert", methods={"POST"}, name="procedure_first_insert")
      */
     public function postAction(): JsonResponse
     {
-        $firstInsert = $this->abstractEntityRepository->createProcedureFirstInsert();
-        return new JsonResponse(["result" => $firstInsert], 200);
-    }
+        $createProcedure = $this->configDatabaseEntityRepository->createProcedureFirstInsert();
 
-    /**
-     * @Route("/procedure/first/insert", methods={"GET"}, name="get_first_insert")
-     */
-    public function getAction()
-    {
-        $callFirstInsert = $this->abstractEntityRepository->callProcedureFirstInsert();
-        return new JsonResponse(["result" => $callFirstInsert], 200);
+        if ($createProcedure == false) {
+            return new JsonResponse(["failure" => "There was an error while creating the procedure."], 500);
+        }
+
+        $execProcedure = $this->configDatabaseEntityRepository->callProcedureFirstInsert();
+
+        if ($execProcedure == false) {
+            return new JsonResponse(["failure" => "There was an error while executing the procedure."], 500);
+        }
+
+        return new JsonResponse(["result" => "The procedure was created and successfully executed."], 200);
     }
 }
