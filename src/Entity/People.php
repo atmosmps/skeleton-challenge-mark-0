@@ -57,7 +57,7 @@ class Pessoa
     private $estado_civil;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Familia", inversedBy="pessoa")
+     * @ORM\ManyToOne(targetEntity="Family", inversedBy="pessoa")
      * @ORM\JoinColumn(name="familia_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $familia;
