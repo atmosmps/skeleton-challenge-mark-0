@@ -7,8 +7,9 @@ class ConfigDatabaseEntityRepository extends AbstractEntityRepository
     public function createProcedureFirstInsert()
     {
         $sql = "
-            create procedure first_insert()
-            BEGIN
+            create or replace procedure public.first_insert()
+            LANGUAGE SQL
+            AS $$
                 INSERT INTO social_program (nome_programa)
                 VALUES  ('Bolsa Família'),
                         ('Renda cidadã'),
@@ -30,7 +31,7 @@ class ConfigDatabaseEntityRepository extends AbstractEntityRepository
                         (3, 'Juliana Peres', 'M', '1976-11-12', 'Brasileira', '18522575045', '270381508','solteira'),
                         (3, 'Paulo Peres', 'M', '1989-01-11', 'Brasileiro', '59697662088', '485824541','solteiro'),
                         (3, 'João Carlos Amorim', 'M', '1996-03-10', 'Brasileiro', '79159458070', '165404759','solteiro');
-            END
+            $$;
         ";
 
         $sqlProcessing = $this->connection->prepare($sql);
@@ -41,12 +42,12 @@ class ConfigDatabaseEntityRepository extends AbstractEntityRepository
             $exception->getMessage();
         }
 
-        return isset($exception) ? ["failure" => "There was an error while creating the procedure."] : true;
+        return isset($exception) ? false : true;
     }
 
     public function callProcedureFirstInsert()
     {
-        $sql = "call first_insert();";
+        $sql = "call public.first_insert();";
 
         $sqlProcessing = $this->connection->prepare($sql);
 
@@ -56,6 +57,6 @@ class ConfigDatabaseEntityRepository extends AbstractEntityRepository
             $exception->getMessage();
         }
 
-        return isset($exception) ? ["failure" => "There was an error while executing the procedure."] : true;
+        return isset($exception) ? false : true;
     }
 }
