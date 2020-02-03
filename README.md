@@ -1,4 +1,16 @@
-## Lliege Challenge
+## Skeleton Challenge Mark 0
+
+### Sobre este projeto
+
+Este é um projeto que pode servir como base para desafios. O desafio deste repositório está no [documento do teste](test-doc.pdf).
+
+### Especificações de Tecnologias
+
+- PHP 7.3
+- Symfony 4.4
+- Docker version 19.03.3
+- Postgres 11.1
+- Nginx
 
 ### Como rodar este projeto
 
@@ -11,25 +23,23 @@
 2. Crie o esquema do Banco de Dados:
 
     `docker-compose exec php-fpm bin/console doctrine:schema:create`
-
-3. Faça o Insert das primeiras informações para isto envie uma requisição POST para:
-
-    `POST: localhost:8080/procedure/first/insert`
     
-**OBS: você pode usar o CURL para isto da seguinte forma:**
+    Se precisar deletar um esquema já criado, use:
+    
+    `docker-compose exec php-fpm bin/console doctrine:schema:drop --force`
+    
+3. Faça o insert das primeiras informações, para isto envie uma requisição POST para:
 
-    `curl -X POST -H 'Content-Type: application/json' localhost:8080/procedure/first/insert`
+    `POST: localhost:8000/procedure/first/insert`
+    
+    **Use o CURL para isto da seguinte forma:**
+    
+    `curl -X POST -H 'Content-Type: application/json' localhost:8000/procedure/first/insert`
 
-4. Execute a Procedure, enviando uma requisição GET:
+OBS: O script para o insert das primeiras informações foram informados no [documento do teste](test-doc.pdf). Pensando em tornar mais fácil a configuração, foi criado com controller que realiza a criação e execução de uma procedure que faz o insert das primeiras informações na base de dados.
 
-    `GET: localhost:8080/procedure/first/insert`
+5. Execute o comando para acessar a aplicação:
 
-**OBS: você pode usar o CURL para isto da seguinte forma:**
+    `localhost:8000`
 
-    `curl -X GET -H 'Content-Type: application/json' localhost:8080/procedure/first/insert`
-
-5. Execute o comando para acessar a aplicação
-
-    `localhost:8080`
-
-**OBS: Se não estiver usando o Docker, terá que alterar as configurações de Banco de Dados no Symfony. E criar a base localmente.**
+**OBS: Caso não esteja usando o Docker, Será necessário alterar as configurações de Banco de Dados no Symfony no arquivo do doctrine que fica em: `config/packages/doctrine.yaml`. Será necessário também, criar o banco de dados separadamente.**
