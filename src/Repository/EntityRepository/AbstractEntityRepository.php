@@ -55,11 +55,7 @@ class AbstractEntityRepository
             $exception->getMessage();
         }
 
-        if (isset($exception)) {
-            return ["failure" => "Houve um erro na inserção da informação."];
-        }
-
-        return true;
+        return isset($exception) ? ["failure" => "Houve um erro durante a criação da procedure."] : true;
     }
 
     public function callProcedureFirstInsert()
@@ -74,10 +70,6 @@ class AbstractEntityRepository
             $exception->getMessage();
         }
 
-        if (isset($exception)) {
-            return ["failure" => "Houve um erro na inserção da informação."];
-        }
-
-        return true;
+        return isset($exception) ? ["failure" => "Houve um erro durante a execução da procedure."] : true;
     }
 }
