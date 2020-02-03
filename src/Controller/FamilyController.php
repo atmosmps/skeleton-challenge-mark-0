@@ -2,13 +2,13 @@
 
 namespace App\Controller;
 
-use App\Entity\Familia;
+use App\Entity\Family;
 use App\Form\FamiliaType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class FamiliaController extends AbstractController
+class FamilyController extends AbstractController
 {
     /**
      * @Route("/", name="familia_index")
@@ -16,7 +16,7 @@ class FamiliaController extends AbstractController
     public function index(Request $request)
     {
         $familias = $this->getDoctrine()
-            ->getRepository(Familia::class)
+            ->getRepository(Family::class)
             ->findAll();
         return $this->render('familia/index.html.twig', [
             'familias' => $familias
@@ -27,7 +27,7 @@ class FamiliaController extends AbstractController
      */
     public function create(Request $request)
     {
-        $familia = new Familia();
+        $familia = new Family();
 
         $form = $this->createForm(FamiliaType::class);
         $form->handleRequest($request);
@@ -49,7 +49,7 @@ class FamiliaController extends AbstractController
     /**
      * @Route("/update/{id}", name="familia_update")
      */
-    public function update(Request $request, Familia $id)
+    public function update(Request $request, Family $id)
     {
         $form = $this->createForm(FamiliaType::class, $id);
         $form->handleRequest($request);
@@ -69,7 +69,7 @@ class FamiliaController extends AbstractController
     /**
      * @Route("/delete/{id}", name="familia_delete")
      */
-    public function delete(Familia $familia)
+    public function delete(Family $familia)
     {
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($familia);

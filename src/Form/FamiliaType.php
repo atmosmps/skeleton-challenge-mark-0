@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Familia;
+use App\Entity\Family;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -26,7 +26,7 @@ class FamiliaType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Familia::class,
+            'data_class' => Family::class,
         ]);
     }
 }

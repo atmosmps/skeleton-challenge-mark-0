@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\FamiliaRepository")
+ * @ORM\Entity(repositoryClass="FamilyRepository")
  */
-class Familia
+class Family
 {
     /**
      * @ORM\Id()
@@ -58,7 +58,7 @@ class Familia
     private $programaSocial;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Pessoa", mappedBy="familia")
+     * @ORM\OneToMany(targetEntity="People", mappedBy="familia")
      */
     private $pessoa;
 

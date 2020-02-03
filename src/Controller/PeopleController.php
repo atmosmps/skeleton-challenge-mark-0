@@ -5,7 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class PessoaController extends AbstractController
+class PeopleController extends AbstractController
 {
     /**
      * @Route("/pessoa", name="pessoa")

@@ -22,7 +22,7 @@ class SocialProgram
     private $nome_programa;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Familia", mappedBy="programaSocial")
+     * @ORM\OneToMany(targetEntity="Family", mappedBy="programaSocial")
      */
     private $familia;
 
